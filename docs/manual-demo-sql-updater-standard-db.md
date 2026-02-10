@@ -9,6 +9,30 @@ Tài liệu này là phiên bản **manual step-by-step** (không dùng script t
 - Docker đã chạy
 - Repo đã có các service trong [docker-compose.yml](docker-compose.yml)
 
+Quan trọng:
+- Bạn phải chạy lệnh trong **thư mục có file** `docker-compose.yml` (root của repo).
+- Nếu bạn chạy ở thư mục khác, `docker compose` sẽ báo: `no configuration file provided: not found`.
+- Ngoài ra kiểm tra bạn không gõ nhầm `ddocker` (thừa chữ `d`). Lệnh đúng là `docker`.
+
+Nếu không chắc đang ở đúng thư mục, chạy:
+
+```bash
+pwd
+ls -la
+```
+
+Trong môi trường hiện tại, repo root là:
+
+```bash
+cd /Volumes/OS/test_failover/vscode
+```
+
+Hoặc dùng cách an toàn (chạy ở đâu cũng được) bằng `-f`:
+
+```bash
+docker compose -f /Volumes/OS/test_failover/vscode/docker-compose.yml ps
+```
+
 Giá trị mặc định trong demo:
 - Vault: `VAULT_ADDR=http://127.0.0.1:8200`, token: `root`
 - Postgres: user/pass/db = `legacy/legacy/legacy`
@@ -25,6 +49,12 @@ Lệnh:
 docker compose up -d --build
 ```
 
+Nếu bạn không đứng ở repo root, dùng:
+
+```bash
+docker compose -f /Volumes/OS/test_failover/vscode/docker-compose.yml up -d --build
+```
+
 Đang làm gì:
 - Build image `vscode-vault` (Vault dev + plugin baked-in)
 - Start các container: Vault, Postgres, MySQL, MSSQL, mock-updater (nếu có)
@@ -36,6 +66,12 @@ Lệnh:
 
 ```bash
 docker compose logs --tail=120 vault
+```
+
+Nếu bạn không đứng ở repo root, dùng:
+
+```bash
+docker compose -f /Volumes/OS/test_failover/vscode/docker-compose.yml logs --tail=120 vault
 ```
 
 Đang làm gì:
