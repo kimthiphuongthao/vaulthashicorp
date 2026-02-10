@@ -112,8 +112,13 @@ func FromConfig(cfg config.Config) (Updater, error) {
 		}
 		return WebhookUpdater{URL: cfg.WebhookURL, Method: cfg.WebhookMethod, Headers: headers}, nil
 	case "sql":
+		driver := cfg.SQLDriver
+		// User-friendly alias: pgx stdlib registers as "pgx".
+		if driver == "postgres" {
+			driver = "pgx"
+		}
 		return SQLUpdater{
-			Driver:           cfg.SQLDriver,
+			Driver:           driver,
 			DSN:              cfg.SQLDSN,
 			UpdateQueryNamed: cfg.SQLUpdateQueryNamed,
 			PlaceholderStyle: cfg.SQLPlaceholderStyle,
@@ -132,6 +137,8 @@ func compileNamedQuery(named, style string, req UpdateRequest) (string, []any, e
 		switch style {
 		case "dollar":
 			return fmt.Sprintf("$%d", n)
+		case "at":
+			return fmt.Sprintf("@p%d", n)
 		case "", "question":
 			return "?"
 		default:

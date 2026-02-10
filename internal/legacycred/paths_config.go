@@ -193,9 +193,9 @@ func validateConfig(cfg config.Config) error {
 			return fmt.Errorf("sql_driver, sql_dsn, sql_update_query_named are required when updater_type=sql")
 		}
 		switch cfg.SQLPlaceholderStyle {
-		case "question", "dollar":
+		case "question", "dollar", "at":
 		default:
-			return fmt.Errorf("sql_placeholder_style must be question|dollar")
+			return fmt.Errorf("sql_placeholder_style must be question|dollar|at")
 		}
 	}
 	return nil

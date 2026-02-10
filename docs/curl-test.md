@@ -58,3 +58,19 @@ curl -sS -X POST "$VAULT_ADDR/v1/legacy-cred/config" \
 ```
 
 Sau đó rotate lại và xem log của container `mock-updater`.
+
+## 7) Test SQL updater với DB tiêu chuẩn (Postgres/MySQL/MSSQL)
+
+Repo đã có sẵn `docker-compose.yml` với 3 DB và init schema `users(username,password_hash)`.
+
+Chạy test tự động (khuyến nghị):
+
+```bash
+chmod +x scripts/test-sql-updater.sh
+./scripts/test-sql-updater.sh
+```
+
+Script sẽ:
+- start `vault` + `postgres` + `mysql` + `mssql` (kèm init)
+- cấu hình `legacy-cred/config` sang `updater_type=sql` theo từng DB
+- gọi `rotate/alice` và verify `password_hash` trong DB khớp với `hash` trả về

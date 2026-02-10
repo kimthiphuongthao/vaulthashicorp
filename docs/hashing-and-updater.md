@@ -56,7 +56,12 @@ Config cần:
 - `sql_driver`: `postgres` | `mysql` | `sqlserver`
 - `sql_dsn`: connection string
 - `sql_update_query_named`: query dùng placeholder `:hash` và `:subject`
-- `sql_placeholder_style`: `question` hoặc `dollar`
+- `sql_placeholder_style`: `question` hoặc `dollar` hoặc `at`
+
+Gợi ý:
+- Postgres: `dollar` (ra `$1`, `$2`)
+- MySQL: `question` (ra `?`)
+- MSSQL: `at` (ra `@p1`, `@p2`)
 
 Ví dụ Postgres:
 

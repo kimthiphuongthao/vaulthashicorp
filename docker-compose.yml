@@ -18,3 +18,61 @@ services:
     command: ["python", "server.py"]
     ports:
       - "8080:8080"
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: legacy
+      POSTGRES_USER: legacy
+      POSTGRES_PASSWORD: legacy
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./docker/db-init/postgres:/docker-entrypoint-initdb.d:ro
+
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: legacy
+      MYSQL_USER: legacy
+      MYSQL_PASSWORD: legacy
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker/db-init/mysql:/docker-entrypoint-initdb.d:ro
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Passw0rd!"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
+
+  mssql-init:
+    image: mcr.microsoft.com/mssql-tools:latest
+    depends_on:
+      - mssql
+    environment:
+      MSSQL_SA_PASSWORD: "Passw0rd!"
+    volumes:
+      - ./docker/db-init/mssql:/init:ro
+    command:
+      - /bin/bash
+      - -lc
+      - |
+        for i in {1..60}; do
+          /opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P "$${MSSQL_SA_PASSWORD}" -Q 'SELECT 1' -b -C && break
+          sleep 1
+        done
+        /opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P "$${MSSQL_SA_PASSWORD}" -i /init/init.sql -b -C
+
+  mssql-tools:
+    image: mcr.microsoft.com/mssql-tools:latest
+    depends_on:
+      - mssql
+    environment:
+      MSSQL_SA_PASSWORD: "Passw0rd!"
+    entrypoint: ["/bin/bash", "-lc"]
