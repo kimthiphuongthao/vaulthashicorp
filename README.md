@@ -2,6 +2,8 @@
 
 This repository contains a Vault **secrets engine plugin** that helps integrate legacy applications into a centralized SSO flow (e.g. Keycloak + OpenIG) when you **cannot modify legacy app code**.
 
+Detailed documentation (Vietnamese) is in [docs/README.md](docs/README.md).
+
 ## What it does
 
 - Generate a random plaintext password for a `subject` (username/email)
