@@ -1,6 +1,6 @@
 module github.com/kimthiphuongthao/vaulthashicorp
 
-go 1.25.7
+go 1.25.0
 
 require (
 	github.com/go-sql-driver/mysql v1.8.1

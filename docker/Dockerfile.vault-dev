@@ -1,0 +1,27 @@
+# Build plugin + run Vault dev with the plugin baked in
+
+FROM golang:1.25-alpine AS builder
+
+RUN apk add --no-cache git ca-certificates
+WORKDIR /src
+
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY cmd ./cmd
+COPY internal ./internal
+
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -ldflags="-s -w" -o /out/vault-plugin-legacy-cred ./cmd/vault-plugin-legacy-cred
+
+
+FROM hashicorp/vault:1.21.2
+
+USER root
+RUN mkdir -p /vault/plugins
+COPY --from=builder /out/vault-plugin-legacy-cred /vault/plugins/vault-plugin-legacy-cred
+COPY docker/entrypoint-vault-dev.sh /usr/local/bin/entrypoint-vault-dev.sh
+RUN chmod +x /usr/local/bin/entrypoint-vault-dev.sh
+
+EXPOSE 8200
+
+ENTRYPOINT ["/usr/local/bin/entrypoint-vault-dev.sh"]

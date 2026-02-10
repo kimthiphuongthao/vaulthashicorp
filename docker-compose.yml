@@ -1,0 +1,20 @@
+services:
+  vault:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.vault-dev
+    ports:
+      - "8200:8200"
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: root
+    cap_add:
+      - IPC_LOCK
+
+  mock-updater:
+    image: python:3.12-alpine
+    working_dir: /app
+    volumes:
+      - ./tools/mock-updater:/app
+    command: ["python", "server.py"]
+    ports:
+      - "8080:8080"

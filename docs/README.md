@@ -9,6 +9,7 @@ Bộ tài liệu này chỉ tập trung vào **nhiệm vụ chính: code và v�
 - [Hashing & Updater](hashing-and-updater.md)
 - [Bảo mật & vận hành](security-and-ops.md)
 - [Build & Test](build-and-test.md)
+- [Test bằng curl](curl-test.md)
 
 ## TL;DR (luồng chính)
 
