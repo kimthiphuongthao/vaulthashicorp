@@ -10,6 +10,7 @@ Bộ tài liệu này chỉ tập trung vào **nhiệm vụ chính: code và v�
 - [Bảo mật & vận hành](security-and-ops.md)
 - [Build & Test](build-and-test.md)
 - [Test bằng curl](curl-test.md)
+- [Demo thủ công SQL updater (Postgres/MySQL/MSSQL)](manual-demo-sql-updater-standard-db.md)
 
 ## TL;DR (luồng chính)
 
