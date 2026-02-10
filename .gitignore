@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# BMAD outputs
+_bmad-output/
+
+# Node
+node_modules/
+
+# Go
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+/bin/
+/dist/
+
+# Vault plugin builds
+vault-plugin-*
