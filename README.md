@@ -17,6 +17,17 @@ This repository contains a Vault **secrets engine plugin** that helps integrate 
 go build -o vault-plugin-legacy-cred ./cmd/vault-plugin-legacy-cred
 ```
 
+## Git: end-of-day sync
+
+If you want a single command to stage/commit/push all changes to GitHub at the end of your workday:
+
+```bash
+chmod +x scripts/*.sh
+./scripts/eod-push.sh "chore: end of day sync"
+```
+
+See [scripts/README.md](scripts/README.md) for details.
+
 ## Vault: register + enable (example)
 
 ```bash

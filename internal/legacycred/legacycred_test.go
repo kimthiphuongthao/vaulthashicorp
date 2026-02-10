@@ -19,12 +19,12 @@ func TestRotateAndRead(t *testing.T) {
 
 	// Configure to noop updater.
 	_, err := b.HandleRequest(ctx, &logical.Request{
-		Storage: storage,
+		Storage:   storage,
 		Operation: logical.UpdateOperation,
-		Path: "config",
+		Path:      "config",
 		Data: map[string]any{
-			"updater_type": "noop",
-			"default_ttl":  60,
+			"updater_type":      "noop",
+			"default_ttl":       60,
 			"default_hash_type": "bcrypt",
 		},
 	})
@@ -34,10 +34,10 @@ func TestRotateAndRead(t *testing.T) {
 
 	// Rotate
 	rotateResp, err := b.HandleRequest(ctx, &logical.Request{
-		Storage: storage,
+		Storage:   storage,
 		Operation: logical.UpdateOperation,
-		Path: "rotate/alice",
-		Data: map[string]any{},
+		Path:      "rotate/alice",
+		Data:      map[string]any{},
 	})
 	if err != nil {
 		t.Fatalf("rotate: %v", err)
@@ -48,9 +48,9 @@ func TestRotateAndRead(t *testing.T) {
 
 	// Read creds
 	credsResp, err := b.HandleRequest(ctx, &logical.Request{
-		Storage: storage,
+		Storage:   storage,
 		Operation: logical.ReadOperation,
-		Path: "creds/alice",
+		Path:      "creds/alice",
 	})
 	if err != nil {
 		t.Fatalf("creds read: %v", err)

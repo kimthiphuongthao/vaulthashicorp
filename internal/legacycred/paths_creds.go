@@ -10,7 +10,7 @@ import (
 
 func (b *backend) pathCreds() *framework.Path {
 	return &framework.Path{
-		Pattern: "creds/" + framework.GenericNameRegex("subject"),
+		Pattern:      "creds/" + framework.GenericNameRegex("subject"),
 		HelpSynopsis: "Read plaintext credentials for a subject (for OpenIG).",
 		Fields: map[string]*framework.FieldSchema{
 			"subject": {Type: framework.TypeString, Description: "Subject identifier (username/email).", Required: true},

@@ -1,9 +1,9 @@
 package hash
 
 import (
+	"crypto/rand"
 	"crypto/sha256"
 	"crypto/sha512"
-	"crypto/rand"
 	"encoding/base64"
 	"encoding/hex"
 	"fmt"

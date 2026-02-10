@@ -28,7 +28,7 @@ type Config struct {
 	SQLDriver           string `json:"sql_driver"`
 	SQLDSN              string `json:"sql_dsn"`
 	SQLUpdateQueryNamed string `json:"sql_update_query_named"` // supports :hash and :subject
-	SQLPlaceholderStyle string `json:"sql_placeholder_style"`    // question|dollar
+	SQLPlaceholderStyle string `json:"sql_placeholder_style"`  // question|dollar
 }
 
 func DefaultConfig() Config {

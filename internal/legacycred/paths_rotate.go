@@ -13,12 +13,12 @@ import (
 
 func (b *backend) pathRotate() *framework.Path {
 	return &framework.Path{
-		Pattern: "rotate/" + framework.GenericNameRegex("subject"),
+		Pattern:      "rotate/" + framework.GenericNameRegex("subject"),
 		HelpSynopsis: "Rotate plaintext + hash for a subject, update legacy credential store, then store plaintext for OpenIG to use.",
 		Fields: map[string]*framework.FieldSchema{
-			"subject": {Type: framework.TypeString, Description: "Subject identifier (username/email).", Required: true},
+			"subject":   {Type: framework.TypeString, Description: "Subject identifier (username/email).", Required: true},
 			"hash_type": {Type: framework.TypeString, Description: "Override hash type for this rotation: bcrypt|sha256|sha512|pbkdf2."},
-			"ttl": {Type: framework.TypeDurationSecond, Description: "Override TTL for this subject plaintext."},
+			"ttl":       {Type: framework.TypeDurationSecond, Description: "Override TTL for this subject plaintext."},
 		},
 		Operations: map[logical.Operation]framework.OperationHandler{
 			logical.UpdateOperation: &framework.PathOperation{Callback: b.handleRotate},
