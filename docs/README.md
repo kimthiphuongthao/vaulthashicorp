@@ -1,5 +1,8 @@
 # Tài liệu plugin Vault (legacy-cred)
 
+## AI quick context
+- [ai-context.md](ai-context.md)
+
 Bộ tài liệu này chỉ tập trung vào **nhiệm vụ chính: code và vận hành thử plugin Vault** phục vụ tích hợp SSO (Keycloak/OpenIG) với legacy app.
 
 ## Mục lục
