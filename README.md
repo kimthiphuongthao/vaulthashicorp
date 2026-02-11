@@ -4,12 +4,10 @@ This repository contains a Vault **secrets engine plugin** that helps integrate 
 
 Detailed documentation (Vietnamese) is in [docs/README.md](docs/README.md).
 
+Start here: `PROJECT-CONTEXT.md`
+
 ## What it does
 
-- Generate a random plaintext password for a `subject` (username/email)
-- Hash the plaintext using a configured algorithm (default: `bcrypt`)
-- Update the legacy credential store (via `webhook` or `sql` updater)
-- Store plaintext in Vault for a limited time (default TTL: **3 hours**) so OpenIG can fetch it and perform legacy login
 
 > Note: Storing plaintext is generally discouraged. This plugin exists specifically for “credential translation” for legacy systems. Use strict Vault policies and short TTLs.
 
